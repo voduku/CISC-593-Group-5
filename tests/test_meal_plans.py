@@ -22,8 +22,9 @@ class MealPlanTestCase(unittest.TestCase):
             db.drop_all()
 
     def test_create_meal_plan(self):
-        response = self.app.post('/meal_plans/', json={'user_id': 1, 'plan': 'test meal plan'})
-        self.assertEqual(response.status_code, 201)
+        with app.app_context():
+            response = self.app.post('/meal_plans/', json={'user_id': 1, 'plan': 'test meal plan'})
+            self.assertEqual(response.status_code, 201)
 
     def test_get_meal_plan(self):
         with app.app_context():
